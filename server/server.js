@@ -1,24 +1,32 @@
 require('./config/config.js');
+
 const express = require('express');
+const app = express();
+//const { request } = require('express');
+
 const colors = require('colors');
 
-const app = express();
-// const port = 
+// Llamando a mongoose
+const mongoose = require('mongoose');
 
-app.get('/usuario',(req, res)=>{
-    res.json('Hola Mundo');
-});
+// llamando a body parser
+const  bodyParser = require('body-parser');
 
-app.post('/usuario',(req, res)=>{
-    res.json('Hola post');
-});
+// parse aplication/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: false }))
+// parse aplication/json
+app.use(bodyParser.json());
 
-app.put('/usuario',(req, res)=>{
-    res.json('Hola put');
-});
+// Routing 
+app.use(require('./routes/usuario.js'));
 
-app.delete('/usuario',(req, res)=>{
-    res.json('Hola deltete');
+
+
+mongoose.connect(process.env.URLDB,
+    {   useNewUrlParser: true , useCreateIndex : true   },
+    (err ,res)=>{
+    if( err )  throw err;
+    console.log('Base de datos ONLINE'.green);
 });
 
 app.listen(process.env.PORT,()=>{
