@@ -14,7 +14,7 @@ app.get('/usuario',(req, res)=>{
 
     let limite = req.query.limite || 5;
     limite = Number(limite);
-    Usuario.find({ estado : false },'nombre email role estado google img') // se puede  hacer filtraciones a los campos de del json
+    Usuario.find({ estado : true },'nombre email role estado google img') // se puede  hacer filtraciones a los campos de del json
             .limit(limite)
             .skip(desde)
             .exec((err, usuarios)=>{
@@ -24,7 +24,7 @@ app.get('/usuario',(req, res)=>{
                         err
                     });
                 }
-                Usuario.count({ estado : false }, (err,conteo) => {
+                Usuario.count({ estado : true }, (err,conteo) => {
 
                     res.json({
                         ok:true,
