@@ -3,7 +3,7 @@ require('./config/config.js');
 const express = require('express');
 const app = express();
 //const { request } = require('express');
-
+ const path = require('path');
 const colors = require('colors');
 
 // Llamando a mongoose
@@ -16,6 +16,9 @@ const  bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false }))
 // parse aplication/json
 app.use(bodyParser.json());
+
+// habilitar la carpetapublica
+app.use( express.static(path.resolve( __dirname,'../public')));
 
 // Configuracion Global de rutas 
 app.use(require('./routes/index.js'));
