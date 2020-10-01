@@ -8,14 +8,15 @@ const _ = require('underscore');
 
 const { verificarToken ,verificarAdmin_Role } = require('../middlewares/autenticacion.js');
 
-app.get('/usuario',verificarToken,(req, res)=>{
+app.get('/usuario',(req, res)=>{
     
     let desde = req.query.desde || 0;
     desde = Number (desde);
 
     let limite = req.query.limite || 5;
     limite = Number(limite);
-    Usuario.find({/* estado : true */},'nombre email role estado google img') // se puede  hacer filtraciones a los campos de del json
+    Usuario.find({/* estado : true */},'nombre email role estado google img') 
+    // se puede  hacer filtraciones a los campos de del json
             .limit(limite)
             .skip(desde)
             .exec((err, usuarios)=>{

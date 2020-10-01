@@ -29,9 +29,9 @@ mongoose.connect(process.env.URLDB,
     {   useNewUrlParser: true , useCreateIndex : true   },
     (err ,res)=>{
     if( err )  throw err;
-    console.log('Base de datos ONLINE'.green);
+    console.log('Base de datos MONGO Status:'.blue,'ONLINE'.green);
 });
 
 app.listen(process.env.PORT,()=>{
-    console.log(`Escuchando el puerto ${process.env.PORT}`.blue);
+    console.log(`Server Escuchando en el puerto: `.blue,`${process.env.PORT}`.green);
 });
